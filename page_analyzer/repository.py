@@ -87,7 +87,7 @@ class URLRepository:
 
     def get_urls_checks(self):
         query = '''
-        SELECT DISTINCT ON (u.id)
+        SELECT
             u.id AS id, 
             u.name AS name,
             uc.created_at  AS created_at,
