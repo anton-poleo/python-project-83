@@ -94,7 +94,6 @@ def get_url_data(id):
             response.raise_for_status()
         except requests.RequestException as e:
             flash('Во время проверки возникла ошибка', 'error')
-            print(e)
             return redirect(url_for('get_url', id=id))
 
         data = parse_response(response)

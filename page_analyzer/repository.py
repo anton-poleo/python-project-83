@@ -8,9 +8,10 @@ from psycopg2.extras import RealDictCursor
 @contextmanager
 def make_pg_conn(autocommit=True):
     database_url = os.getenv('DATABASE_URL')
-    with psycopg2.connect(database_url, cursor_factory=RealDictCursor) as conn:
-        conn.autocommit = autocommit
-        yield conn
+    conn = psycopg2.connect(database_url, cursor_factory=RealDictCursor)
+    conn.autocommit = autocommit
+    yield conn
+    conn.close()
 
 
 class URLRepository:
