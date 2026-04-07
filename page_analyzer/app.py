@@ -44,16 +44,15 @@ def add_url():
     with make_pg_conn() as conn:
         rep = URLRepository(conn)
 
-        if rep.get_by_name(f'{url.scheme}://{url.hostname}'):
+        obj = rep.get_by_name(f'{url.scheme}://{url.hostname}')
+        if obj:
+            id_ = obj['id']
             flash('Страница уже существует', 'error')
-            conn.close()
-            return render_template('index.html')
+        else:
+            id_ = rep.insert_url(f'{url.scheme}://{url.hostname}')
+            flash('Страница успешно добавлена', 'success')
 
-        flash('Страница успешно добавлена', 'success')
-
-        id = rep.insert_url(f'{url.scheme}://{url.hostname}')
-
-    return redirect(url_for('get_url', id=id))
+    return redirect(url_for('get_url', id=id_))
 
 
 @app.route('/urls', methods=['GET'])
