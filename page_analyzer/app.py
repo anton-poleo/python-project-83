@@ -45,7 +45,7 @@ def add_url():
         rep = URLRepository(conn)
 
         if rep.get_by_name(f'{url.scheme}://{url.hostname}'):
-            flash('URL already exists', 'error')
+            flash('Страница уже существует', 'error')
             conn.close()
             return render_template('index.html')
 
@@ -92,7 +92,7 @@ def get_url_data(id):
         try:
             response = requests.get(url['name'], timeout=1)
             response.raise_for_status()
-        except requests.RequestException as e:
+        except requests.RequestException:
             flash('Во время проверки возникла ошибка', 'error')
             return redirect(url_for('get_url', id=id))
 
