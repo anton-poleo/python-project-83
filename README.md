@@ -1,5 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/anton-poleo/python-project-83/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/anton-poleo/python-project-83/actions)
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=anton-poleo_python-project-83)](https://sonarcloud.io/summary/new_code?id=anton-poleo_python-project-83)
 
 # Page analyzer
 
