@@ -2,12 +2,11 @@ import os
 from urllib.parse import urlparse
 
 import requests
-
 from dotenv import load_dotenv
 from flask import (
+    Flask,
     abort,
     flash,
-    Flask,
     redirect,
     render_template,
     request,
@@ -17,7 +16,6 @@ from flask import (
 from page_analyzer.parse import parse_response
 from page_analyzer.repository import URLRepository, make_pg_conn
 from page_analyzer.validate import validate_url
-
 
 app = Flask(__name__)
 load_dotenv()
