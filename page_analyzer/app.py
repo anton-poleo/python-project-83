@@ -38,7 +38,7 @@ def add_url():
     errors = validate_url(url)
     if errors:
         flash(' '.join(errors), 'error')
-        return render_template('index.html')
+        return render_template('index.html'), 422
 
     url = urlparse(url)
     with make_pg_conn() as conn:
