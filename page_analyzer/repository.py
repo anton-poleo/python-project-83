@@ -72,7 +72,7 @@ class URLRepository:
         query = '''
         SELECT * FROM url_checks
         WHERE url_id = %s
-        ORDER BY id DESC
+        ORDER BY created_at DESC
         '''
         with self.conn.cursor() as cur:
             cur.execute(query, (url_id,))
@@ -87,15 +87,15 @@ class URLRepository:
 
     def get_urls_checks(self):
         query = '''
-        SELECT DISTINCT ON (urls.id)
-            urls.id AS id, 
-            urls.name AS name,
-            url_checks.created_at  AS created_at,
-            url_checks.status_code AS status_code
-        FROM urls
-        LEFT JOIN url_checks ON 
-            urls.id = url_checks.url_id
-        ORDER BY id, created_at DESC;
+        SELECT DISTINCT ON (u.id)
+            u.id AS id, 
+            u.name AS name,
+            uc.created_at  AS created_at,
+            uc.status_code AS status_code
+        FROM urls u 
+        LEFT JOIN url_checks uc ON 
+            u.id = uc.url_id
+        ORDER BY u.created_at DESC, u.id DESC, uc.created_at DESC;
         '''
         with self.conn.cursor() as cur:
             cur.execute(query)

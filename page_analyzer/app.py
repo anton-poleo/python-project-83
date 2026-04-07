@@ -99,7 +99,6 @@ def get_url_data(id):
             return redirect(url_for('get_url', id=id))
 
         data = parse_response(response)
-        print(data)
         rep.insert_url_check(url['id'], data)
         flash('Страница успешно проверена', 'success')
         return redirect(url_for('get_url', id=id))
