@@ -98,9 +98,4 @@ def get_url_data(id):
         data = parse_response(response)
         rep.insert_url_check(url['id'], data)
         flash('Страница успешно проверена', 'success')
-        url_checks = rep.get_url_checks(id)
-        return render_template(
-            'url.html',
-            url=url,
-            url_checks=url_checks,
-        )
+        return redirect(url_for('get_url', id=id))
