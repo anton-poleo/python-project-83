@@ -73,12 +73,15 @@ def get_url(id):
         rep = URLRepository(conn)
         url = rep.get_by_id(id)
 
-    if not url:
-        abort(404)
+        if not url:
+            abort(404)
+
+        url_checks = rep.get_url_checks(url['id'])
 
     return render_template(
         'url.html',
         url=url,
+        url_checks=url_checks
     )
 
 
@@ -96,6 +99,7 @@ def get_url_data(id):
             return redirect(url_for('get_url', id=id))
 
         data = parse_response(response)
+        print(data)
         rep.insert_url_check(url['id'], data)
         flash('Страница успешно проверена', 'success')
         return redirect(url_for('get_url', id=id))
