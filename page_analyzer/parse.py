@@ -11,7 +11,7 @@ def parse_response(response):
 
     return {
         'status': response.status_code,
-        'h1': f'{h1[:200]}...' if len(h1) > 200 else h1,
-        'title': f'{title[:200]}...' if len(title) > 200 else title,
-        'description': f'{description[:200]}...' if len(description) > 200 else description,
+        'h1': f'{h1[:200]}...' if h1 and len(h1) > 200 else h1,
+        'title': f'{title[:200]}...' if title and len(title) > 200 else title,
+        'description': f'{description[:200]}...' if description and len(description) > 200 else description,
     }
