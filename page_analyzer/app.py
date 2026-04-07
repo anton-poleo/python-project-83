@@ -41,11 +41,10 @@ def add_url():
         return render_template('index.html')
 
     url = urlparse(url)
-    flash(url.hostname)
     with make_pg_conn() as conn:
         rep = URLRepository(conn)
 
-        if rep.get_by_name(url.hostname):
+        if rep.get_by_name(f'{url.scheme}://{url.hostname}'):
             flash('URL already exists', 'error')
             conn.close()
             return render_template('index.html')
